@@ -10,7 +10,36 @@ def select_directory(label):
         label.config(text=directory)
 
 def augment_images(input_dir, output_dir, num_images, resize, rotate):
+     def show_error(message):
+        messagebox.showerror("Error", message)
+        return
     
+    if not input_dir or not output_dir or not num_images or not resize or not rotate:
+        show_error("Fill in all the fields")
+        return
+    
+    try:
+        num_images = int(num_images)
+        if num_images <= 0:
+            raise ValueError
+    except ValueError:
+        show_error("Number of images must be positive")
+        return
+    
+    try:
+        resize = float(resize)
+        if not (0 <= resize <= 1):
+            raise ValueError
+    except ValueError:
+        show_error("Resize value must be in range of 0 to 1")
+        return
+    
+    try:
+        rotate = float(rotate)
+    except ValueError:
+        show_error("Must be a number")
+        return
+
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
     
