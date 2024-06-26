@@ -5,6 +5,27 @@ from PIL import Image
 from image_processor import ImageProcessor
 
 class ImageAugmentationApp:
+    """
+    A class to create a GUI application for image augmentation.
+
+    Attributes
+    ----------
+    root : Tk
+        The root window of the Tkinter application.
+    processor : ImageProcessor
+        An instance of ImageProcessor to handle image transformations.
+
+    Methods
+    -------
+    setup_gui():
+        Sets up the GUI components of the application.
+    select_input_directory():
+        Opens a dialog to select the input directory.
+    select_output_directory():
+        Opens a dialog to select the output directory.
+    start_augmentation():
+        Starts the image augmentation process based on user inputs.
+    """
     def __init__(self, root):
         self.root = root
         self.root.title("Image Augmentation")
@@ -16,6 +37,9 @@ class ImageAugmentationApp:
         self.setup_gui()
 
     def setup_gui(self):
+        """
+        Sets up the GUI components of the application.
+        """
         input_label = tk.Label(self.root, text="Select the directory with images")
         input_label.pack(anchor="center")
 
@@ -69,16 +93,25 @@ class ImageAugmentationApp:
         augment_button.pack(pady=15)
 
     def select_input_directory(self):
+        """
+        Opens a dialog to select the input directory.
+        """
         directory = filedialog.askdirectory()
         if directory:
             self.input_dir_label.config(text=directory)
 
     def select_output_directory(self):
+        """
+        Opens a dialog to select the output directory.
+        """
         directory = filedialog.askdirectory()
         if directory:
             self.output_dir_label.config(text=directory)
 
     def start_augmentation(self):
+        """
+        Starts the image augmentation process based on user inputs.
+        """
         input_dir = self.input_dir_label.cget("text")
         output_dir = self.output_dir_label.cget("text")
         num_images = self.num_images_entry.get()
@@ -89,6 +122,14 @@ class ImageAugmentationApp:
         saturation_factor = float(self.saturation_entry.get() or 1.0)
 
         def show_error(message):
+            """
+            Displays an error message.
+
+            Parameters
+            ----------
+            message : str
+                The error message to display.
+            """
             messagebox.showerror("Error", message)
 
         if not input_dir or not output_dir or not num_images:
