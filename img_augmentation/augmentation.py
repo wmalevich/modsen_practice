@@ -29,8 +29,8 @@ class ImageAugmentationApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Image Augmentation")
-        self.root.geometry("650x650")
-        self.root.minsize(650, 650)
+        self.root.geometry("670x670")
+        self.root.minsize(670, 670)
         
         self.setup_gui()
 
@@ -93,6 +93,10 @@ class ImageAugmentationApp:
         self.saturation_entry = ttk.Entry(left_frame)
         self.saturation_entry.pack(pady=5)
 
+        self.crop_var = tk.IntVar()
+        crop_checkbutton = ttk.Checkbutton(left_frame, text="Enable random cropping", variable=self.crop_var)
+        crop_checkbutton.pack(pady=5)
+
         augment_button = ttk.Button(left_frame, text="Start augmentation", command=self.start_augmentation)
         augment_button.pack(pady=15)
 
@@ -120,7 +124,6 @@ class ImageAugmentationApp:
         if directory:
             self.input_dir_label.config(text=directory)
 
-            # Display the first image in the directory
             for file_name in os.listdir(directory):
                 if file_name.lower().endswith(('jpg', 'jpeg', 'png')):
                     image_path = os.path.join(directory, file_name)
@@ -193,6 +196,7 @@ class ImageAugmentationApp:
             show_error("Brightness value must be a valid number")
             return
         
+
         try:
             contrast_factor = float(self.contrast_entry.get() or 1.0)
         except ValueError:
@@ -204,6 +208,8 @@ class ImageAugmentationApp:
         except ValueError:
             show_error("Saturation value must be a valid number")
             return
+        
+        random_crop = self.crop_var.get()
 
 
         if not os.path.exists(output_dir):
@@ -218,7 +224,7 @@ class ImageAugmentationApp:
 
         for i in range(num_images):
             for img in images:
-                transformed_image = processor.apply_transformations(img, resize, rotate, brightness_factor, contrast_factor, saturation_factor)
+                transformed_image = processor.apply_transformations(img, resize, rotate, brightness_factor, contrast_factor, saturation_factor, random_crop)
                 output_path = os.path.join(output_dir, f"augmented_{i}_{os.path.basename(img.filename)}")
                 transformed_image.save(output_path)
 
