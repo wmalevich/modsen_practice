@@ -29,8 +29,8 @@ class ImageAugmentationApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Image Augmentation")
-        self.root.geometry("680x680")
-        self.root.minsize(680, 680)
+        self.root.geometry("710x710")
+        self.root.minsize(710, 710)
         
         self.setup_gui()
 
