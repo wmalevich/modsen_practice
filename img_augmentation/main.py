@@ -1,5 +1,5 @@
 from tkinter import Tk
-from augmentation import ImageAugmentationApp
+from img_augmentation.augmentation import ImageAugmentationApp
 
 def main():
     root = Tk()

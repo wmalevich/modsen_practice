@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
 import os
 from PIL import Image, ImageTk
-from image_processor import ImageProcessor
+from img_augmentation.processor import ImageProcessor
 
 class ImageAugmentationApp:
     """
