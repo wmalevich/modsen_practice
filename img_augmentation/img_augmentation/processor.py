@@ -24,6 +24,8 @@ class ImageProcessor:
             The factor by which to adjust saturation.
         random_crop : bool
             Wheter to apply random cropping
+        add_noise : bool
+            Wheter to add noise to the image
 
         Returns
         -------
