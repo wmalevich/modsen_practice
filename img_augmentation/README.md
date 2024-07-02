@@ -10,6 +10,8 @@ This application is designed to apply various transformations to images, aiming 
 - Set the number of images to create
 - Resize and rotate images
 - Adjust the brightness, contrast, and saturation of images
+- Apply random cropping
+- Add noise to images
 
 ## Contents
 - [Technologies](#technologies)
@@ -19,6 +21,7 @@ This application is designed to apply various transformations to images, aiming 
 - [Python](https://www.python.org/)
 - [Tkinter](https://docs.python.org/3/library/tk.html)
 - [Pillow (PIL)](https://pillow.readthedocs.io/en/stable/)
+- [NumPy](https://numpy.org/doc/2.0/)
 
 ## Getting Started
 To install and use this project, follow these steps:
@@ -35,4 +38,12 @@ $ pip install -r requirements.txt
 Run the application:
 ```sh
 $ python main.py
+```
+
+## Testing
+For testing purposes, the unittest framework in Python was utilized
+
+To execute the unit tests:
+```sh
+$ python tests/processor_test.py
 ```
