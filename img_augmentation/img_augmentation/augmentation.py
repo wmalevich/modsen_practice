@@ -29,8 +29,8 @@ class ImageAugmentationApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Image Augmentation")
-        self.root.geometry("670x670")
-        self.root.minsize(670, 670)
+        self.root.geometry("680x680")
+        self.root.minsize(680, 680)
         
         self.setup_gui()
 
@@ -96,6 +96,10 @@ class ImageAugmentationApp:
         self.crop_var = tk.IntVar()
         crop_checkbutton = ttk.Checkbutton(left_frame, text="Enable random cropping", variable=self.crop_var)
         crop_checkbutton.pack(pady=5)
+
+        self.noise_var = tk.IntVar()
+        noise_checkbutton = ttk.Checkbutton(left_frame, text="Add Gaussian Noise", variable=self.noise_var)
+        noise_checkbutton.pack(pady=5)
 
         augment_button = ttk.Button(left_frame, text="Start augmentation", command=self.start_augmentation)
         augment_button.pack(pady=15)
@@ -211,6 +215,7 @@ class ImageAugmentationApp:
         
         random_crop = self.crop_var.get()
 
+        add_noise = self.noise_var.get()
 
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
@@ -224,11 +229,10 @@ class ImageAugmentationApp:
 
         for i in range(num_images):
             for img in images:
-                transformed_image = processor.apply_transformations(img, resize, rotate, brightness_factor, contrast_factor, saturation_factor, random_crop)
+                transformed_image = processor.apply_transformations(img, resize, rotate, brightness_factor, contrast_factor, saturation_factor, random_crop, add_noise)
                 output_path = os.path.join(output_dir, f"augmented_{i}_{os.path.basename(img.filename)}")
                 transformed_image.save(output_path)
 
                 self.display_image(transformed_image)
                 self.root.update()
-
 
